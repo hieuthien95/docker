@@ -142,3 +142,8 @@ $ docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
+# Xem log container
+```
+Docker logs 4eb65ca28ddb
+```
+
