@@ -172,3 +172,13 @@ _build docker image_
 ```
 docker build -t my_image .
 ```
+_change name:tag_
+```
+$ docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+$ docker tag <image_id> <new_image_name>:<new_image_tag>
+
+$ docker tag 0e5574283393 fedora/httpd:version1.0
+$ docker tag httpd fedora/httpd:version1.0
+$ docker tag httpd:test fedora/httpd:version1.0.test
+$ docker tag 0e5574283393 myregistryhost:5000/fedora/httpd:version1.0
+```
