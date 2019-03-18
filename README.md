@@ -106,6 +106,7 @@ CONTAINER ID        IMAGE                   COMMAND                  CREATED    
 fa7bb9c16a94        phpmyadmin/phpmyadmin   "/run.sh supervisord…"   5 minutes ago       Up 5 minutes        9000/tcp, 0.0.0.0:8081->80/tcp   myadmin
 
 $ docker rm fa7bb9c16a94
+$ docker rm -f fa7bb9c16a94
 fa7bb9c16a94
 
 $ docker ps
