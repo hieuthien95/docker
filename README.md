@@ -147,3 +147,28 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 Docker logs 4eb65ca28ddb
 ```
 
+# Create image
+_Chuẩn bị *Dockerfile*_
+```
+FROM golang:1.11.4-alpine  as builder
+RUN pwd
+RUN ls
+WORKDIR /go/src/gitlab.com/lak8s/lession1
+RUN pwd
+RUN ls
+COPY . /go/src/gitlab.com/lak8s/lession1/
+RUN go build -o ./dist/app
+RUN pwd
+RUN ls
+# p2
+WORKDIR /demo
+RUN pwd
+RUN ls
+COPY --from=builder /go/src/gitlab.com/lak8s/lession1/dist/app .
+EXPOSE 9090
+ENTRYPOINT ["./app"]
+```
+_build docker image_
+```
+docker build -t my_image .
+```
