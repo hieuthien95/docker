@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  gw:
+    build: /Users/thienbh/Documents/TS/frontend/api-gateway
+    ports:
+      - 8080:80
+    restart: always
+    
+  account:
+    build: /Users/thienbh/Documents/TS/core/account
+    ports:
+      - 8081:81
+    restart: always
+    
+  purchasing:
+    build: /Users/thienbh/Documents/TS/seller/purchasing
+    ports:
+      - 8082:82
+    restart: always
