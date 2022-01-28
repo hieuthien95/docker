@@ -28,6 +28,9 @@ docker build --tag gw .
 docker run --publish 8080:80 --network my_network gw
 ```
 
+
+# DOCKER
+
 # PULL 1 image
 ```
 $ docker -v
@@ -208,4 +211,57 @@ $ docker tag 0e5574283393 fedora/httpd:version1.0
 $ docker tag httpd fedora/httpd:version1.0
 $ docker tag httpd:test fedora/httpd:version1.0.test
 $ docker tag 0e5574283393 myregistryhost:5000/fedora/httpd:version1.0
+```
+
+# DOCKER COMPOSE
+```
+- VERSION
+- SERVICES
+- NETWORKS
+- VOLUMES
+```
+
+```
+docker compose config
+docker compose up
+
+docker volume ls
+docker inspect volume <VOLUME_NAME>
+sudo ls -la <Mountpoint>
+
+docker compose ps
+docker compose top
+docker compose logs
+
+docker container ps
+docker exec -it <CONTAINER_ID> /bin/bash
+
+docker compose stop
+docker compose start
+docker compose rm
+
+------------------------------------------------------------------------
+$ docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                  NAMES
+ad1339a93e55   wordpress:5.6-php7.4   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:8080->80/tcp   api-gateway_wordpress_1
+475b83bf486d   mysql:5.7              "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   3306/tcp, 33060/tcp    api-gateway_db_1
+
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     api-gateway_db
+local     api-gateway_wordpress
+local     c98ea5cfc4e4f8a7014e54d72d63ede721c4439da1346f2f2d4424555d47910b
+local     cf1e7c8f14c28a6b0847d616927f3c48183c0f2440a8d24bbe60d0acd341116e
+
+$ docker inspect volume api-gateway_db
+[
+    {
+        "Mountpoint": "/var/lib/docker/volumes/api-gateway_db/_data",
+        "Name": "api-gateway_db",
+        ...
+        "Labels": {...}
+    }
+]
+
+$ sudo ls -la /var/lib/docker/volumes/api-gateway_db/_data
 ```
