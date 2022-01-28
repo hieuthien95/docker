@@ -1,0 +1,10 @@
+{
+    "protocol" : "HTTP",
+    "address" : "localhost:81",
+    "path" : "/account-test"
+},
+{
+    "protocol" : "HTTP",
+    "address" : "localhost:82",
+    "path" : "/purchasing-test"
+}
