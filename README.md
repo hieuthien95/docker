@@ -241,6 +241,13 @@ docker compose start
 docker compose rm
 
 ------------------------------------------------------------------------
+$ docker compose stop
+$ docker compose rm
+$ docker stop $(docker ps -a)
+$ docker rm $(docker ps -a)
+$ docker image rm $(docker image ls)
+$ docker compose up
+
 $ docker ps
 CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                  NAMES
 ad1339a93e55   wordpress:5.6-php7.4   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   0.0.0.0:8080->80/tcp   api-gateway_wordpress_1
