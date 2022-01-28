@@ -1,3 +1,33 @@
+# NOTE
+```
+Tao network:  docker network create <NETWORK_NAME>
+
+Tao image:    docker build --tag <IMAGE_NAME> .
+List image:   docker image ls
+Xoa image:    docker image rm  <IMAGE_NAME>
+
+Run container:            docker run --publish <CALL_PORT>:<LOCAL_PORT> <IMAGE_NAME>
+List container running:   docker ps -a
+Stop container running:   docker stop <CONTAINER_ID>
+Xóa container:            docker rm <CONTAINER_ID>
+
+Stop all container:     docker stop $(docker ps -a)
+Remove all container:   docker rm $(docker ps -a)
+Stop all image: docker  image rm $(docker image ls)
+
+------------------------------------------------------------------------
+docker network create my_network
+
+docker build --tag account .
+docker run --publish 8081:81 --network my_network account
+
+docker build --tag purchasing .
+docker run --publish 8082:82 --network my_network purchasing
+
+docker build --tag gw .
+docker run --publish 8080:80 --network my_network gw
+```
+
 # PULL 1 image
 ```
 $ docker -v
@@ -16,7 +46,7 @@ latest: Pulling from library/hello-world
 Digest: sha256:2557e3c07ed1e38f26e389462d03ed943586f744621577a99efb77324b0fe535
 Status: Downloaded newer image for hello-world:latest
 ```
------------------------------------------------
+
 # DELETE 1 image
 ```
 $ docker images
@@ -32,7 +62,6 @@ $ docker images
 REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
 ```
 
-
 # CREATE container mysql/phpMyAdmin/wordpress
 ```
 $ docker network create mysql_network
@@ -47,6 +76,7 @@ fa7bb9c16a94da5aed15b41fdb7fa61348470fa77a6db5f6bacc681b3ce8ae27
 $ docker run --name wordpress_container -d --network mysql_network -p 8800:80 --link mysql_container:mysql wordpress
 9301f10a3c69fedba9cd50789ec64f3ce89d7fddc8d8b3be8e222ac008155467
 ```
+
 ```
 $ docker network ls
 NETWORK ID          NAME                DRIVER              SCOPE
@@ -113,8 +143,16 @@ $ docker ps
 CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                            NAMES
 ```
 
-# STOP tat ca cac container dang chay
+# STOP/Remove tat ca cac Image/Container dang chay
 ```
+$ docker stop $(docker ps -a)
+$ docker stop $(docker ps -qa)
+$ docker rm $(docker ps -a)
+$ docker rm $(docker ps -qa)
+$ docker image rm $(docker image ls)
+
+------------------------------------------------------------------------
+
 $ docker ps
 CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                            NAMES
 4eb65ca28ddb        phpmyadmin/phpmyadmin   "/run.sh supervisord…"   5 days ago          Up 2 seconds        9000/tcp, 0.0.0.0:8080->80/tcp   phpmyadmin_container
@@ -123,23 +161,8 @@ CONTAINER ID        IMAGE                   COMMAND                  CREATED    
 $ docker stop $(docker ps -qa)
 4eb65ca28ddb
 6945cd8bf720
-d3d049bd7c6c
 
 $ docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-```
-
-# DELETE tat ca cac container
-```
-$ docker ps -a
-CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS                    PORTS                            NAMES
-4eb65ca28ddb        phpmyadmin/phpmyadmin   "/run.sh supervisord…"   5 days ago          Exited (255) 4 days ago   9000/tcp, 0.0.0.0:8080->80/tcp   phpmyadmin_container
-6945cd8bf720        mysql:5.7               "docker-entrypoint.s…"   5 days ago          Exited (255) 4 days ago   3306/tcp, 33060/tcp              mysql_container
-d3d049bd7c6c        hello-world             "/hello"                 6 days ago          Exited (0) 5 days ago                                      relaxed_wing
-
-$ docker rm $(docker ps -qa)
-
-$ docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 ```
 
@@ -149,6 +172,7 @@ Docker logs 4eb65ca28ddb
 ```
 
 # Create image
+
 _Chuẩn bị *Dockerfile*_
 ```
 FROM golang:1.11.4-alpine  as builder
@@ -169,10 +193,12 @@ COPY --from=builder /go/src/gitlab.com/lak8s/lession1/dist/app .
 EXPOSE 9090
 ENTRYPOINT ["./app"]
 ```
+
 _build docker image_
 ```
-docker build -t my_image .
+docker build -t <IMAGE_NAME> .
 ```
+
 _change name:tag_
 ```
 $ docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
