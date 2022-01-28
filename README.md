@@ -13,7 +13,7 @@ Xóa container:            docker rm <CONTAINER_ID>
 
 Stop all container:     docker stop $(docker ps -a)
 Remove all container:   docker rm $(docker ps -a)
-Stop all image: docker  image rm $(docker image ls)
+Remove all image:       docker image rm $(docker image ls)
 
 ------------------------------------------------------------------------
 docker network create my_network
