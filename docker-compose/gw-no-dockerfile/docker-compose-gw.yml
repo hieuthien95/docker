@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  account:
+    build: /Users/thienbh/Documents/TS/core/account
+    environment:
+      protocol: HTTP
+      env: stg
+      version: 1
+      config: ...
+
+    networks:
+      - some-net
+    
+  purchasing:
+    build: /Users/thienbh/Documents/TS/seller/purchasing
+    environment:
+      protocol: HTTP
+      env: stg
+      version: 1
+      config: ...
+    networks:
+      - some-net
+
+  gw:
+    build: /Users/thienbh/Documents/TS/frontend/api-gateway
+    environment:
+      protocol: HTTP
+      env: stg
+      version: 1
+      config: ...
+    ports:
+      - 8080:80
+    links:
+      - account
+      - purchasing
+    networks:
+      - some-net
+
+networks:
+  some-net:
+    driver: bridge
