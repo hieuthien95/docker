@@ -1,10 +1,13 @@
 {
+    "_id" : ObjectId("61f23f7e60c8a72acd7bb562"),
     "protocol" : "HTTP",
-    "address" : "localhost:81",
-    "path" : "/account-test"
-},
-{
-    "protocol" : "HTTP",
-    "address" : "localhost:82",
+    "address" : "purchasing:82",
     "path" : "/purchasing-test"
+}
+
+{
+    "_id" : ObjectId("61f2334e60c8a72acd7c1125"),
+    "protocol" : "HTTP",
+    "address" : "account:81",
+    "path" : "/account-test"
 }
